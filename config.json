@@ -1,0 +1,10 @@
+{
+    "status": "off",
+    "index": "..\/index.php",
+    "index_name": "Documentation",
+    "param": {
+        "max_duration": "99",
+        "max_files_per_share": "10",
+        "default_duration": "7"
+    }
+}
