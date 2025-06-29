@@ -24,6 +24,15 @@ Pour que FileSharing fonctionne correctement, il est nécessaire d’ajouter le 
     }
 ```
 
+Ajoute le code suivant dans le fichier **index.php**  juste avant la balise de fermeture `</html>`  afin de faire apparaître le bouton.
+
+```
+<script>
+    var Sparent = "<?php echo $_SESSION['parent']; ?>";
+    var fileSharingActive = <?php echo json_encode($fileShareActive); ?>;
+</script>
+```
+
 Ce code permet de charger correctement le fichier **filesharing.js** indispensable au bon fonctionnement du module FileSharing.
 
 ## 📋 Fonctionnalités
