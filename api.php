@@ -129,6 +129,20 @@ switch ($action) {
             
             $shareUrl = "http://" . $_SERVER['HTTP_HOST'] . "/sicsy/modules/FileSharing/view.php?id=" . $shareId;
             
+            try {
+                $logStmt = $pdo->prepare("INSERT INTO logs (IP, path, content, type, user) VALUES (?, ?, ?, ?, ?)");
+                $ip = $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'];
+                $path = '/FileSharing';
+                $content = 'Création partage: ' . implode(', ', array_map('basename', $files)) . ' (ID: ' . $shareId . ')';
+                $type = 'createShare';
+                $user = $_SESSION['username'];
+                
+                $logStmt->execute([$ip, $path, $content, $type, $user]);
+                error_log("🔗 FileSharing API - Log créé pour le partage: $shareId");
+            } catch (PDOException $e) {
+                error_log("🔗 FileSharing API - Erreur création log: " . $e->getMessage());
+            }
+            
             error_log("🔗 FileSharing API - Partage créé: $shareId");
             echo json_encode([
                 'success' => true,
@@ -219,6 +233,20 @@ switch ($action) {
             
             $stmt = $pdo->prepare("UPDATE file_shares SET downloads_count = downloads_count + 1 WHERE share_id = ?");
             $stmt->execute([$shareId]);
+            
+            try {
+                $logStmt = $pdo->prepare("INSERT INTO logs (IP, path, content, type, user) VALUES (?, ?, ?, ?, ?)");
+                $ip = $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'];
+                $path = '/FileSharing';
+                $content = 'Téléchargement: ' . basename($fileName) . ' (Partage: ' . $shareId . ')';
+                $type = 'downloadShare';
+                $user = $share['user_id']; // Utilisateur qui a créé le partage
+                
+                $logStmt->execute([$ip, $path, $content, $type, $user]);
+                error_log("🔗 FileSharing API - Log créé pour le téléchargement: " . basename($fileName));
+            } catch (PDOException $e) {
+                error_log("🔗 FileSharing API - Erreur création log téléchargement: " . $e->getMessage());
+            }
             
             $fileName = basename($fileName);
             $parent = dirname($fileName);
