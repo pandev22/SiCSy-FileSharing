@@ -2,6 +2,8 @@
 
 Module de partage de fichiers avec durée limitée et protection par mot de passe.
 
+## ⚠️Ce code fonctionne seulement avec le thème [**DarkModern**](https://github.com/pandev22/SiCSy-DarkModern)
+
 ## 🚀 Installation rapide
 
 ### 1. Installation automatique
@@ -35,34 +37,7 @@ Ajoute le code suivant dans le fichier **index.php**  juste avant la balise de f
 
 Ce code permet de charger correctement le fichier **filesharing.js** indispensable au bon fonctionnement du module FileSharing.
 
-## 📋 Fonctionnalités
-
-- ✅ Partage de fichiers avec lien unique
-- ✅ Durée limitée (1 jour à 3 mois)
-- ✅ Protection par mot de passe (optionnel)
-- ✅ Limite de téléchargements
-- ✅ Interface moderne avec thème DarkModern
-- ✅ Intégration automatique
-
-## 🎯 Utilisation
-
-1. **Cliquez sur "🔗 Partager un fichier"** dans l'interface SICSY
-2. **Sélectionnez les fichiers** à partager
-3. **Configurez** : durée, téléchargements max, mot de passe
-4. **Créez le partage** et copiez le lien
-
-## 🐛 Problèmes courants
-
-- **Erreur 403** : Vérifiez que le module est activé
-- **Aucun fichier** : Vérifiez les logs PHP
-- **Lien invalide** : Vérifiez la base de données
-
-## 🔒 Sécurité
-
-- Sessions validées
-- Mots de passe hashés
-- Validation des données
-- Protection CSRF
+## ⚠️Ce code fonctionne seulement avec le thème [**DarkModern**](https://github.com/pandev22/SiCSy-DarkModern)
 
 ---
 
